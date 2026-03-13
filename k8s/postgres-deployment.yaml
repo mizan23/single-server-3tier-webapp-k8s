@@ -16,6 +16,7 @@ spec:
       containers:
       - name: postgres
         image: postgres:14
+
         env:
         - name: POSTGRES_DB
           value: bmidb
@@ -23,5 +24,15 @@ spec:
           value: bmi_user
         - name: POSTGRES_PASSWORD
           value: bmipass
+
         ports:
         - containerPort: 5432
+
+        volumeMounts:
+        - name: init-sql
+          mountPath: /docker-entrypoint-initdb.d
+
+      volumes:
+      - name: init-sql
+        configMap:
+          name: postgres-init

@@ -13,12 +13,18 @@ spec:
       labels:
         app: backend
     spec:
+
+      initContainers:
+      - name: wait-for-postgres
+        image: postgres:14
+        command: ['sh','-c','until pg_isready -h postgres-service -p 5432; do echo waiting for postgres; sleep 2; done;']
+
       containers:
       - name: backend
         image: mizan23/bmi-backend:v1
         env:
         - name: DATABASE_URL
-          value: postgresql://bmi_user:bmipass@postgres-service:5432/bmidb
+          value: postgres://bmi_user:bmipass@postgres-service:5432/bmidb
         - name: NODE_ENV
           value: production
         - name: PORT

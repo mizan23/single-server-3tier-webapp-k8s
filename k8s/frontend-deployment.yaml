@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: mizan23/bmi-frontend:v1
+        image: mizan23/bmi-frontend:v3
         ports:
         - containerPort: 80

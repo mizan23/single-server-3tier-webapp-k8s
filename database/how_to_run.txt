@@ -1,0 +1,8 @@
+kubectl create configmap postgres-init \
+--from-file=database/init.sql \
+-n production
+
+
+check
+
+kubectl get configmap -n production
